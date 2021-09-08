@@ -12,7 +12,15 @@ The priority queue of employees would be sorted based on the commission, so an
 available worker would pick the highest commission employee to perform the task.
 
 Since the scale of this task is quite small, I've opted to using simple in-built
-queues in Python to achieve this behaviour and used multiprocessing to achieve
+queues in Python to achieve this behaviour and used multithreading to achieve
 the behaviour of workers.
 
+To simulate the employees being busy, I have used a 3rd queue, so the code
+doesn't pick the employee with the highest commission for every car.  
+
 ![](images/parking.png)
+
+Future Enhancements:
+* Keep track of total profit so far
+* Change design to use external workers and task queues instead of in-built data
+structures
