@@ -1,5 +1,3 @@
-from time import sleep
-
 from parkingservice.constant import GAS_FEE, CAR_FEE
 from parkingservice.employee import Employee
 

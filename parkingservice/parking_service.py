@@ -1,5 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor
-from multiprocessing import Pool, Manager
+from concurrent.futures import ThreadPoolExecutor, Future
 from queue import PriorityQueue, Queue
 
 from parkingservice.employee import Employee
@@ -16,11 +15,10 @@ class ParkingService:
     def add_employee(self, employee: Employee):
         self.employee_queue.put((-1.0 * employee.commission, employee))
 
-    def park_car(self, car: Car):
+    def park_car(self, car: Car) -> Future:
         _, employee = self.employee_queue.get()
         while self.busy_employees.qsize():
             self.add_employee(self.busy_employees.get())
         future = self.executor.submit(car.refuel_car, employee)
         self.busy_employees.put(employee)
-
         return future
